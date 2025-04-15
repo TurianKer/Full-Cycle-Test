@@ -1,0 +1,17 @@
+---
+- name: My Super Playbook
+  hosts: all
+  become: true
+
+  vars:
+    mytext: "Hello papa"
+
+  tasks:
+   - name: Ping test
+     ping:
+
+   - name: create Folder
+     include_tasks: create_folder.yaml
+
+   - name: create Files
+     include_tasks: create_files.yaml
