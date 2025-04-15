@@ -1,0 +1,1 @@
+This second file describes policy of updates to the project 
