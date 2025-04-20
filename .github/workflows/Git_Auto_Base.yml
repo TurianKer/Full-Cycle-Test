@@ -13,14 +13,16 @@ on: # когда запускать данный файл (триггер) их 
     branches: # список брэнчей которые триггерят данный файл при команде push
       - main
 
-jobs: # может быть сколько угодно (block как в ansible)
+jobs: # может быть сколько угодно (block как в ansible), все раннеры которые являются тасками запускаются В ПОРЯДКЕ ПЕРЕЧИСЛЕНИЯ  
   my_testing: # название джоба может быть любым
-    runs-on: ubuntu-latest # где запускать степы джоба (виртуалка)
+    runs-on: ubuntu-latest # где запускать степы джоба (виртуалка на которой будет запускаться докер)
     steps: # like task in ansible
       - name: print Hello
         run : echo "Hello World from testing" # run = shell in linux
+        
       - name: Knowledge about OS 
         run :  echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
+        
       - name: execute few command #shell script
         run : | # знак пайпа создает СПИСОК который будет работать
           echo "If you want to code" 
@@ -28,6 +30,10 @@ jobs: # может быть сколько угодно (block как в ansible
           echo "SO JUST GO CODE BRO"
           echo "Application name: ${{ env.APPLICATION_NAME }}"  
 # так прикрепляются переменные в данном случае ключ.значение
+        
+      - name: Git clone my repo #склонировать весь текущий репозиторий на виртуалку
+        uses: actions/checkout@v1 #внешний скрипт
+
       - name: list current folder
         run : ls -la
         
@@ -37,6 +43,13 @@ jobs: # может быть сколько угодно (block как в ansible
     steps:
     - name: Print Hello 
       run : echo "Hello World from Deploy job"
+      
     - name: Print Deploy Package
       run : echo "Deploy Package name is ${{ env.DEPLOY_PACKAGE_NAME }}"
+
+    - name: Lets test some packages if there are here 1
+      run : aws --version
+
+    - name: Lets test some packages if there are here 1
+      run : zip
    
