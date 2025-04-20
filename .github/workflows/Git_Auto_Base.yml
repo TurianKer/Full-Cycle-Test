@@ -4,6 +4,9 @@
 # TurianKer Prod.
 #------------------------
 name: Git-Automation-Base
+env: # глоабльные переменные с которыми будет работать 
+  APPLICATION_NAME     : "My_Flask"
+  DEPLOY_PACKAGE_NAME  : "flask_deploy_ver_${{ github.sha }}" # код коммита в фигурных скобках (он указан в правом углу коммита - по сути уникальный идентификатор) 
 
 on: # когда запускать данный файл (триггер) их может быть сколько угодно
   push: # в данном случае команда push - триггер
@@ -15,13 +18,24 @@ jobs: # может быть сколько угодно (block как в ansible
     runs-on: ubuntu-latest # где запускать степы джоба (виртуалка)
     steps: # like task in ansible
       - name: print Hello
-        run: echo "Hello World from testing" # run = shell in linux
+        run : echo "Hello World from testing" # run = shell in linux
       - name: Knowledge about OS 
-        run:  echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
+        run :  echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
+      - name: execute few command #shell script
+        run : | # знак пайпа создает СПИСОК который будет работать
+          echo "If you want to code" 
+          echo "You just need to CODE bro"
+          echo "SO JUST GO CODE BRO"
+          echo "Application name: ${{ env.APPLICATION_NAME }}" 
+# так прикрепляются переменные в данном случае ключ.значение
+
         
   my_deploy:
     runs-on: ubuntu-latest
+    needs: [my_testing]
     steps:
     - name: Print Hello 
-      run: echo "Hello World from Deploy job"
-    needs: [my_testing]
+      run : echo "Hello World from Deploy job"
+    - name: Print Deploy Package
+      run : echo "Deploy Package name is ${{ env.DEPLOY_PACKAGE_NAME }}"
+   
