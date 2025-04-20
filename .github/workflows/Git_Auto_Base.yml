@@ -24,3 +24,4 @@ jobs: # может быть сколько угодно (block как в ansible
     steps:
     - name: Print Hello 
       run: echo "Hello World from Deploy job"
+    needs: [my_testing]
