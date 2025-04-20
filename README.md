@@ -1,6 +1,5 @@
 # Full-Cycle-Test
 Status of Last Deployment: <br>
-<img src="https://github.com/TurianKer/Full-Cycle-Test/workflows/Git-Automation-Base/badge.svg?branch=main >"><br> <!-- name в файле а не название файла --> <!-- ну нету master branch есть только main -->
-
+<img src="https://github.com/TurianKer/Full-Cycle-Test/actions/workflows/Git-Automation-Base/badge.svg>"><br> <!-- name в файле а не название файла --> 
 
 Copyleft by TurianKer 2025
