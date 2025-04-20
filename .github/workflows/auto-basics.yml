@@ -1,0 +1,25 @@
+#------------------------
+# Part 1
+#
+# TurianKer Prod.
+#------------------------
+name: Git-Automation-Base
+
+on: # когда запускать данный файл (триггер) их может быть сколько угодно
+  pushes: # в данном случае команда push - триггер
+    branches: # список брэнчей которые триггерят данный файл при команде push
+      - master
+
+jobs: # может быть сколько угодно (block как в ansible)
+  my_testing: # название джоба может быть любым
+    runs-on: ubuntu-later # где запускать степы джоба (виртуалка)
+      steps: # task like ansible
+      - name: print Hello
+        run: echo "Hello World from testing" # run = shell in linux
+        
+jobs:
+  my_deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Print Hello 
+      run: echo "Hello World from Deploy job"
