@@ -40,9 +40,23 @@ jobs: # может быть сколько угодно (block как в ansible
   my_deploy:
     runs-on: ubuntu-latest
     needs: [my_testing]
+    env: #переменные уровня джоб (работают только с ними и видны лишь в них)
+      VAR1: "this is job level variable1"
+      VAR2: "this is job level variable2"
+      
     steps:
     - name: Print Hello 
       run : echo "Hello World from Deploy job"
+
+    - name: Print env vars
+      run : |
+        echo "Var1 = ${{ env.VAR1 }}"
+        echo "Var2 = ${{ env.VAR2 }}"
+        echo "Var3 = $LOCAL_VAR"
+      #локальные переменные прописываются как в линуксе
+      env: # те самые локальные переменные
+        LOCAL_VAR: "THIS IS SUPERLOCAL Environment variable"
+        
       
     - name: Print Deploy Package
       run : echo "Deploy Package name is ${{ env.DEPLOY_PACKAGE_NAME }}"
@@ -51,5 +65,5 @@ jobs: # может быть сколько угодно (block как в ansible
       run : aws --version
 
     - name: Lets test some packages if there are here 1
-      run : zip
+      run : zip --version
    
