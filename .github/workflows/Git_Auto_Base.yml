@@ -26,9 +26,10 @@ jobs: # может быть сколько угодно (block как в ansible
           echo "If you want to code" 
           echo "You just need to CODE bro"
           echo "SO JUST GO CODE BRO"
-          echo "Application name: ${{ env.APPLICATION_NAME }}" 
+          echo "Application name: ${{ env.APPLICATION_NAME }}"  
 # так прикрепляются переменные в данном случае ключ.значение
-
+      - name: list current folder
+        run : ls -la
         
   my_deploy:
     runs-on: ubuntu-latest
